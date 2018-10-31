@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ipfs": "^0.32.3"
+    "hyperhtml": "^2.16.0",
+    "ipfs": "^0.32.3",
+    "kefir": "^3.8.5"
   },
   "devDependencies": {
     "electron": "^3.0.6",

@@ -1,0 +1,19 @@
+{
+  "name": "dokutek",
+  "version": "0.0.1",
+  "description": "Dokutek",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "postinstall": "electron-rebuild"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ipfs": "^0.32.3"
+  },
+  "devDependencies": {
+    "electron": "^3.0.6",
+    "electron-rebuild": "^1.8.2"
+  }
+}

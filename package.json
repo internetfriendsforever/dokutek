@@ -5,17 +5,35 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "postinstall": "electron-rebuild"
+    "postinstall": "electron-builder install-app-deps",
+    "dist": "electron-builder",
+    "release": "electron-builder --publish"
   },
-  "author": "",
+  "build": {
+    "appId": "com.dokutek.app",
+    "mac": {
+      "category": "public.app-category.reference"
+    },
+    "protocols": [
+      {
+        "name": "dokutek",
+        "role": "Viewer",
+        "schemes": [
+          "dokutek"
+        ]
+      }
+    ]
+  },
+  "author": "internetfriendsforever <anyone@internetfriendsforever.com>",
   "license": "ISC",
   "dependencies": {
+    "electron-debug": "^2.0.0",
     "hyperhtml": "^2.16.0",
     "ipfs": "^0.32.3",
     "kefir": "^3.8.5"
   },
   "devDependencies": {
     "electron": "^3.0.6",
-    "electron-rebuild": "^1.8.2"
+    "electron-builder": "^20.29.0"
   }
 }

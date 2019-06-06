@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron')
+const { ipcRenderer, clipboard } = require('electron')
 const { bind, wire } = require('hyperhtml')
 const { fromEvents, merge, combine } = require('kefir')
 
@@ -27,9 +27,16 @@ const value = merge([
     .map(event => event.target.value)
 ]).toProperty(defaultValue)
 
-const saved = fromEvents(ipcRenderer, 'saved', (event, result) => result).toProperty(() => null)
+const saved = fromEvents(ipcRenderer, 'saved', (event, result) => result)
 
-const form = combine({ value, saved })
+saved.onValue(saved => {
+  clipboard.writeText(`dokutek://${saved.hash}`)
+})
+
+const form = combine({
+  value,
+  saved: saved.toProperty(() => null)
+})
 
 const state = combine({ form })
 
@@ -38,7 +45,7 @@ state.onValue(state => {
 
   if (state.form.saved) {
     const url = `dokutek://${state.form.saved.hash}`
-    status = wire()`<p>Saved: <a href=${url}>${url}</a></p>`
+    status = wire()`<p>Saved and copied to clipboard! <a href=${url}>${url}</a></p>`
   }
 
   bind(document.body)`
